@@ -28,7 +28,7 @@ public class Theatre {
                 director1,
                 musicAuthor,
                 "История о заколдованных лебедях",
-                petipa  // <-- Сюда передаём объект petipa
+                petipa
         );
 
         regularShow.addActor(actor1);
@@ -48,7 +48,7 @@ public class Theatre {
         regularShow.addActor(actor3);
         printCast("Обычный спектакль (после замены)", regularShow);
 
-        System.out.println("\n🧪 ТЕСТ: Попытка повторного добавления актёра...");
+        System.out.println(" ТЕСТ: Попытка повторного добавления актёра...");
 
         // Сначала добавляем нормально
         regularShow.addActor(actor1);
@@ -61,27 +61,26 @@ public class Theatre {
 
         System.out.println("\n🎭 ТЕСТ ЗАМЕНЫ АКТЁРА ПО ФАМИЛИИ");
 
-        // Допустим, мы хотим заменить Анну Петрову на Сергея Сидорова в обычном спектакле
-        // Сначала выведем текущий состав
+
         printCast("Состав ДО замены", regularShow);
 
-        // Вызываем наш новый метод
+
         regularShow.replaceActor(actor3, "Петрова");
 
-        // Выводим результат
+
         printCast("Состав ПОСЛЕ замены", regularShow);
 
-        // Тест на несуществующую фамилию
-        System.out.println("\n🧙 Тест несуществующей фамилии:");
+
+        System.out.println(" Тест несуществующей фамилии:");
         regularShow.replaceActor(actor1, "НеизвестнаяФамилия");
 
         Actor fakeActor = new Actor("Фантом", "Фантомов", Gender.MALE, 190);
         boolean removed = operaShow.getListOfActors().remove(fakeActor);
 
         if (!removed) {
-            System.out.println("⚠️ Не удалось удалить: актёра 'Фантом Фантомов' нет в составе 'Кармен'. Список не изменился.");
+            System.out.println(" Не удалось удалить: актёра 'Фантом Фантомов' нет в составе 'Кармен'. Список не изменился.");
         } else {
-            System.out.println("✅ Актёр 'Фантом Фантомов' успешно удалён (это странно, проверь логику!).");
+            System.out.println(" Актёр 'Фантом Фантомов' успешно удалён (это странно, проверь логику!).");
         }
         System.out.println();
 

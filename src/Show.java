@@ -50,35 +50,35 @@ public class Show {
 
     public void addActor(Actor actor) {
         if (listOfActors.contains(actor)) {
-            System.out.println("⚠️ Актёр '" + actor.getName() + " " + actor.getSurname() +
+            System.out.println(" Актёр '" + actor.getName() + " " + actor.getSurname() +
                     "' уже участвует в спектакле \"" + this.title + "\". " +
                     "Дублирование запрещено!");
-            return; // Прерываем выполнение метода, ничего не добавляем
+            return;
         }
         listOfActors.add(actor);
-        System.out.println("✅ Актёр '" + actor.getName() + " " + actor.getSurname() +
+        System.out.println(" Актёр '" + actor.getName() + " " + actor.getSurname() +
                 "' успешно добавлен в спектакль \"" + this.title + "\".");
     }
 
     public void replaceActor(Actor newActor, String surnameToReplace) {
-        // Проходим по списку с доступом к индексу, чтобы можно было сделать set()
+
         for (int i = 0; i < listOfActors.size(); i++) {
             Actor currentActor = listOfActors.get(i);
 
-            // Сравниваем фамилии (регистронезависимо для надежности, но можно и строго)
+
             if (currentActor.getSurname().equals(surnameToReplace)) {
                 System.out.println("🔄 Заменяем актёра '" + currentActor.getName() + " " + currentActor.getSurname() +
                         "' на '" + newActor.getName() + " " + newActor.getSurname() + "' в спектакле \"" + this.title + "\".");
 
-                // Производим замену по индексу
+
                 listOfActors.set(i, newActor);
 
-                // Так как мы нашли и заменили первого попавшегося, выходим из метода
+
                 return;
             }
         }
 
-        // Если цикл завершился и мы здесь — значит, актёр с такой фамилией не найден
+
         System.out.println("⚠️ Предупреждение: Актёр с фамилией '" + surnameToReplace +
                 "' не найден в составе спектакля \"" + this.title + "\". Замена не произведена.");
     }
