@@ -14,9 +14,9 @@ public class Opera extends MusicalShow{
     @Override
     public String toString() {
         return "Opera{" +
-                "title='" + getTitle() + '\'' +
+                "title='" + this.title + '\'' +
                 ", choirSize=" + choirSize +
-                ", musicAuthor='" + getMusicAuthor() + '\'' +
+                ", musicAuthor='" + this.musicAuthor + '\'' +
                 '}';
     }
 }

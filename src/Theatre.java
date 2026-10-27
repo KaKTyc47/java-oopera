@@ -11,13 +11,25 @@ public class Theatre {
         Director director2 = new Director("Елена", "Еленова", Gender.FEMALE,20);
 
         String musicAuthor = "Пётр Ильич Чайковский";
-        String choreographer = "Мариус Петипа";
+        Person petipa = new Person("Мариус", "Петипа", Gender.MALE);
 
         Show regularShow = new Show("Драма жизни", 120, director1);
-        Opera operaShow = new Opera( "Кармен", 140, director2, musicAuthor,
-                "Страстная история любви и ревности", 40 );
-        Ballet balletShow = new Ballet( "Лебединое озеро", 150, director1, musicAuthor,
-                "История о заколдованных лебедях", choreographer );
+        Opera operaShow = new Opera(
+                "Кармен",
+                140,
+                director2,
+                musicAuthor,
+                "Страстная история любви и ревности",
+                40
+        );
+        Ballet balletShow = new Ballet(
+                "Лебединое озеро",
+                150,
+                director1,
+                musicAuthor,
+                "История о заколдованных лебедях",
+                petipa  // <-- Сюда передаём объект petipa
+        );
 
         regularShow.addActor(actor1);
         regularShow.addActor(actor2);
@@ -36,6 +48,33 @@ public class Theatre {
         regularShow.addActor(actor3);
         printCast("Обычный спектакль (после замены)", regularShow);
 
+        System.out.println("\n🧪 ТЕСТ: Попытка повторного добавления актёра...");
+
+        // Сначала добавляем нормально
+        regularShow.addActor(actor1);
+
+        // Теперь пытаемся добавить того же самого актёра снова
+        regularShow.addActor(actor1);
+
+        // Проверяем итоговый размер списка
+        System.out.println("Итого актёров в спектакле: " + regularShow.getListOfActors().size());
+
+        System.out.println("\n🎭 ТЕСТ ЗАМЕНЫ АКТЁРА ПО ФАМИЛИИ");
+
+        // Допустим, мы хотим заменить Анну Петрову на Сергея Сидорова в обычном спектакле
+        // Сначала выведем текущий состав
+        printCast("Состав ДО замены", regularShow);
+
+        // Вызываем наш новый метод
+        regularShow.replaceActor(actor3, "Петрова");
+
+        // Выводим результат
+        printCast("Состав ПОСЛЕ замены", regularShow);
+
+        // Тест на несуществующую фамилию
+        System.out.println("\n🧙 Тест несуществующей фамилии:");
+        regularShow.replaceActor(actor1, "НеизвестнаяФамилия");
+
         Actor fakeActor = new Actor("Фантом", "Фантомов", Gender.MALE, 190);
         boolean removed = operaShow.getListOfActors().remove(fakeActor);
 
@@ -46,25 +85,24 @@ public class Theatre {
         }
         System.out.println();
 
-        System.out.println("📜 ТЕКСТЫ ЛИБРЕТТО:");
+        System.out.println(" ТЕКСТЫ ЛИБРЕТТО:");
         System.out.println("- Опера '" + operaShow.getTitle() + "': " + operaShow.getLibrettoText());
         System.out.println("- Балет '" + balletShow.getTitle() + "': " + balletShow.getLibrettoText());
 
-        System.out.println("\n🎭 ТЕАТР ЗАКРЫВАЕТ ДВЕРИ. СПАСИБО ЗА ПРОСМОТР! 🎭");
+        System.out.println(" ТЕАТР ЗАКРЫВАЕТ ДВЕРИ. СПАСИБО ЗА ПРОСМОТР! ");
     }
 
     private static void printCast(String title, Show show) {
         System.out.println("--- " + title + " ---");
 
-        // Получаем список актёров
         var actors = show.getListOfActors();
 
         if (actors.isEmpty()) {
             System.out.println("  (В составе пока никого нет)");
         } else {
+
             for (Actor actor : actors) {
-                System.out.println("- " + actor.getName() + " " + actor.getSurname() +
-                        " (Рост: " + actor.getHeight() + " см)");
+                System.out.println("- " + actor);
             }
         }
         System.out.println();

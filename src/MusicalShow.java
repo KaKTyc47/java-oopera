@@ -1,6 +1,6 @@
 public class MusicalShow extends Show {
-    private String musicAuthor;
-    private String librettoText;
+    protected String musicAuthor;
+    protected String librettoText;
 
     public MusicalShow(String title, int duration, Director director,
                        String musicAuthor, String librettoText) {
@@ -20,10 +20,10 @@ public class MusicalShow extends Show {
     @Override
     public String toString() {
         return "MusicalShow{" +
-                "title='" + getTitle() + '\'' +
-                ", duration=" + getDuration() +
-                ", musicAuthor='" + musicAuthor + '\'' +
-                ", librettoText='" + librettoText + '\'' +
+                "title='" + this.title + '\'' +
+                ", duration=" + this.duration +
+                ", musicAuthor='" + this.musicAuthor + '\'' +
+                ", librettoText='" + this.librettoText + '\'' +
                 '}';
     }
 }
