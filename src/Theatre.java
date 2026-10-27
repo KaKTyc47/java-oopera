@@ -50,45 +50,43 @@ public class Theatre {
 
         System.out.println(" ТЕСТ: Попытка повторного добавления актёра...");
 
-        // Сначала добавляем нормально
+
         regularShow.addActor(actor1);
 
-        // Теперь пытаемся добавить того же самого актёра снова
+
         regularShow.addActor(actor1);
 
-        // Проверяем итоговый размер списка
+
         System.out.println("Итого актёров в спектакле: " + regularShow.getListOfActors().size());
 
-        System.out.println("\n🎭 ТЕСТ ЗАМЕНЫ АКТЁРА ПО ФАМИЛИИ");
-
-
-        printCast("Состав ДО замены", regularShow);
-
-
+        System.out.println(" ТЕСТ 1: Обычная замена (уникальная фамилия)");
+        printCast("Состав до замены", regularShow);
         regularShow.replaceActor(actor3, "Петрова");
+        printCast("Состав после замены", regularShow);
 
 
-        printCast("Состав ПОСЛЕ замены", regularShow);
+        System.out.println(" ТЕСТ 2: Конфликт фамилий (два Иванова)");
 
 
-        System.out.println(" Тест несуществующей фамилии:");
+        Actor actor4 = new Actor("Пётр", "Иванов", Gender.MALE, 178);
+
+
+        regularShow.addActor(actor4);
+
+        printCast("Состав перед конфликтом", regularShow);
+
+        System.out.println("\n--- Попытка замены по фамилии 'Иванов' (должно сработать предупреждение) ---");
+
+        regularShow.replaceActor(actor3, "Иванов");
+
+        printCast("Состав после попытки (должен остаться без изменений)", regularShow);
+
+
+        System.out.println("\n🎭 ТЕСТ 3: Актёр с несуществующей фамилией");
         regularShow.replaceActor(actor1, "НеизвестнаяФамилия");
 
-        Actor fakeActor = new Actor("Фантом", "Фантомов", Gender.MALE, 190);
-        boolean removed = operaShow.getListOfActors().remove(fakeActor);
-
-        if (!removed) {
-            System.out.println(" Не удалось удалить: актёра 'Фантом Фантомов' нет в составе 'Кармен'. Список не изменился.");
-        } else {
-            System.out.println(" Актёр 'Фантом Фантомов' успешно удалён (это странно, проверь логику!).");
-        }
-        System.out.println();
-
-        System.out.println(" ТЕКСТЫ ЛИБРЕТТО:");
-        System.out.println("- Опера '" + operaShow.getTitle() + "': " + operaShow.getLibrettoText());
-        System.out.println("- Балет '" + balletShow.getTitle() + "': " + balletShow.getLibrettoText());
-
-        System.out.println(" ТЕАТР ЗАКРЫВАЕТ ДВЕРИ. СПАСИБО ЗА ПРОСМОТР! ");
+        System.out.println("\n🎉 ВСЕ ТЕСТЫ ЗАВЕРШЕНЫ! 🎉");
+        System.out.println("🎭 ТЕАТР ЗАКРЫВАЕТ ДВЕРИ. СПАСИБО ЗА ПРОСМОТР! 🎭");
     }
 
     private static void printCast(String title, Show show) {

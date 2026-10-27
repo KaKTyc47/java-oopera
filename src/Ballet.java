@@ -24,7 +24,7 @@ public class Ballet extends MusicalShow {
                 "title='" + this.title + '\'' +
                 ", duration=" + this.duration +
                 ", choreographer='" + choreoName + '\'' +
-                ", musicAuthor='" + this.musicAuthor + '\'' +
+                ", musicAuthor='" + musicAuthor + '\'' +
                 '}';
     }
 }

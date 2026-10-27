@@ -50,37 +50,45 @@ public class Show {
 
     public void addActor(Actor actor) {
         if (listOfActors.contains(actor)) {
-            System.out.println(" Актёр '" + actor.getName() + " " + actor.getSurname() +
-                    "' уже участвует в спектакле \"" + this.title + "\". " +
-                    "Дублирование запрещено!");
+            System.out.println(" Актёр '" + actor + "' уже участвует в спектакле. Дублирование запрещено!");
             return;
         }
         listOfActors.add(actor);
-        System.out.println(" Актёр '" + actor.getName() + " " + actor.getSurname() +
-                "' успешно добавлен в спектакль \"" + this.title + "\".");
+        System.out.println( " Актёр '" + actor + "' успешно добавлен в спектакль.");
     }
 
     public void replaceActor(Actor newActor, String surnameToReplace) {
 
-        for (int i = 0; i < listOfActors.size(); i++) {
-            Actor currentActor = listOfActors.get(i);
+        ArrayList<Actor> candidates = new ArrayList<>();
 
-
-            if (currentActor.getSurname().equals(surnameToReplace)) {
-                System.out.println("🔄 Заменяем актёра '" + currentActor.getName() + " " + currentActor.getSurname() +
-                        "' на '" + newActor.getName() + " " + newActor.getSurname() + "' в спектакле \"" + this.title + "\".");
-
-
-                listOfActors.set(i, newActor);
-
-
-                return;
+        for (Actor actor : listOfActors) {
+            if (actor.getSurname().equals(surnameToReplace)) {
+                candidates.add(actor);
             }
         }
 
 
-        System.out.println("⚠️ Предупреждение: Актёр с фамилией '" + surnameToReplace +
-                "' не найден в составе спектакля \"" + this.title + "\". Замена не произведена.");
+        if (candidates.isEmpty()) {
+            System.out.println(" Предупреждение: Актёр с фамилией '" + surnameToReplace +
+                    "' не найден в составе спектакля \"" + this.title + "\".");
+        }
+        else if (candidates.size() > 1) {
+
+            System.out.println(" Ошибка: Найдено " + candidates.size() +
+                    " актёров с фамилией '" + surnameToReplace + "':");
+            for (Actor c : candidates) {
+                System.out.println("   - " + c);
+            }
+            System.out.println("Замена невозможна: фамилия не уникальна. Укажите более точные данные.");
+        }
+        else {
+
+            Actor oldActor = candidates.get(0);
+            int index = listOfActors.indexOf(oldActor);
+
+            System.out.println(" Заменяем актёра '" + oldActor + "' на '" + newActor + "' в спектакле \"" + this.title + "\".");
+            listOfActors.set(index, newActor);
+        }
     }
 
     @Override
@@ -88,7 +96,7 @@ public class Show {
         return "Show{" +
                 "title='" + title + '\'' +
                 ", duration=" + duration +
-                ", director=" + director.getName() +
+                ", director=" + director.name +
                 '}';
     }
 }
